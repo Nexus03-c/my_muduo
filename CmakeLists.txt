@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 2.6)
+project(my_muduo)
+
+set(CXX_FlAGS 
+-g
+-std=c11
+)
+
+add_subdirectory(source/base)
+add_subdirectory(source/net)
