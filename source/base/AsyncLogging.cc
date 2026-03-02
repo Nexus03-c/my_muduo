@@ -1,12 +1,14 @@
+#include <functional>
 #include "AsyncLogging.h"
 #include "LogFile.h"
 
-AsyncLogging::AsyncLogging(int flush_interval): 
+AsyncLogging::AsyncLogging(int flush_interval, std::string log_file): 
     flush_interval_(flush_interval),
+    log_file_(log_file),
     running_(true),
     current_buffer_(new Buffer),
     next_buffer_(new Buffer),
-    logging_thread_(threadFunc)
+    logging_thread_(std::bind(&AsyncLogging::threadFunc, this))
 {
     current_buffer_->bZero();
     next_buffer_->bZero();
@@ -49,7 +51,7 @@ void AsyncLogging::threadFunc() {
     BufferVector buffers_to_output;
     buffers_to_output.reserve(16);
 
-    LogFile log_file;
+    LogFile log_file(log_file_);
     while(running_) {
         {
             std::unique_lock<std::mutex> lock(mutex_);
@@ -65,7 +67,7 @@ void AsyncLogging::threadFunc() {
         }
 
         for(const auto &buffer : buffers_to_output) {
-            //TODO: log_file.append
+            log_file.append(buffer->data(), buffer->length());
         }
 
         if(buffers_to_output.size()>2) {
@@ -83,7 +85,7 @@ void AsyncLogging::threadFunc() {
             new_buffer2->reset();
         }
         buffers_to_output.clear();
-        //TODO: flush
+        log_file.flush();
     }
-    //TODO: flush
+    log_file.flush();
 }

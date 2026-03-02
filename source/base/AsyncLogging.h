@@ -11,7 +11,7 @@
 
 class AsyncLogging : public nonecopyable {
 public:
-    AsyncLogging(int flush_interval = 2);
+    AsyncLogging(int flush_interval = 2, std::string log_file = "test.log");
     ~AsyncLogging();
 
     void append(const char *log_line, int len);
@@ -19,6 +19,7 @@ public:
 private:
     void threadFunc();
     const int flush_interval_;
+    std::string log_file_;
     std::atomic<bool> running_;
     std::mutex mutex_;
     std::condition_variable cond_;
