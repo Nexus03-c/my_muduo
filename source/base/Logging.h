@@ -24,7 +24,8 @@ public:
     static void setLogLevel(LogLevel log_level);
     static LogLevel log_level();
 private:
-    std::string base_name_;
+    void GetFileName(std::string &base_name);
+    char base_name_[64];
     int line_;
     LogStream stream_;
     LogLevel log_level_;

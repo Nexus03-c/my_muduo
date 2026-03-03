@@ -31,6 +31,7 @@ public:
     const char* data() const {return buffer_;}
     char* current() {return cur_;};
     int length() const { return cur_ - buffer_;}
+    void add(size_t len) { cur_ += len;}
 private:
     const char* end() { return buffer_ + Size;}
     char buffer_[Size];

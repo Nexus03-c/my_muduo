@@ -1,6 +1,11 @@
 #include <stdio.h>
 #include "LogStream.h"
 
+LogStream& LogStream::operator<<(bool val) {
+    *this<<(val? '1' : '0');
+    return *this;
+}
+
 LogStream& LogStream::operator<<(short num) {
     *this<<static_cast<int>(num);
     return *this;
@@ -14,7 +19,8 @@ LogStream& LogStream::operator<<(unsigned short num) {
 LogStream& LogStream::operator<<(int num) {
     if(buffer_.avail() >= LogStream::kMaxNumericSize) {
         char* buffer = buffer_.current();
-        snprintf(buffer, buffer_.avail(), "%d", num);
+        int len = snprintf(buffer, buffer_.avail(), "%d", num);
+        buffer_.add(len);
     }
     return *this;
 }
@@ -22,7 +28,8 @@ LogStream& LogStream::operator<<(int num) {
 LogStream& LogStream::operator<<(unsigned int num) {
     if(buffer_.avail() >= LogStream::kMaxNumericSize) {
         char* buffer = buffer_.current();
-        snprintf(buffer, buffer_.avail(), "%d", num);
+        int len = snprintf(buffer, buffer_.avail(), "%d", num);
+        buffer_.add(len);
     }
     return *this;
 }
@@ -30,7 +37,8 @@ LogStream& LogStream::operator<<(unsigned int num) {
 LogStream& LogStream::operator<<(long num) {
     if(buffer_.avail() >= LogStream::kMaxNumericSize) {
         char* buffer = buffer_.current();
-        snprintf(buffer, buffer_.avail(), "%ld", num);
+        int len = snprintf(buffer, buffer_.avail(), "%ld", num);
+        buffer_.add(len);
     }
     return *this;
 }
@@ -38,7 +46,8 @@ LogStream& LogStream::operator<<(long num) {
 LogStream& LogStream::operator<<(unsigned long num) {
     if(buffer_.avail() >= LogStream::kMaxNumericSize) {
         char* buffer = buffer_.current();
-        snprintf(buffer, buffer_.avail(), "%ld", num);
+        int len = snprintf(buffer, buffer_.avail(), "%ld", num);
+        buffer_.add(len);
     }
     return *this;
 }
@@ -46,7 +55,8 @@ LogStream& LogStream::operator<<(unsigned long num) {
 LogStream& LogStream::operator<<(long long num) {
     if(buffer_.avail() >= LogStream::kMaxNumericSize) {
         char* buffer = buffer_.current();
-        snprintf(buffer, buffer_.avail(), "%lld", num);
+        int len = snprintf(buffer, buffer_.avail(), "%lld", num);
+        buffer_.add(len);
     }
     return *this;
 }
@@ -54,7 +64,8 @@ LogStream& LogStream::operator<<(long long num) {
 LogStream& LogStream::operator<<(unsigned long long num) {
     if(buffer_.avail() >= LogStream::kMaxNumericSize) {
         char* buffer = buffer_.current();
-        snprintf(buffer, buffer_.avail(), "%lld", num);
+        int len = snprintf(buffer, buffer_.avail(), "%lld", num);
+        buffer_.add(len);
     }
     return *this;
 }
@@ -67,7 +78,8 @@ LogStream& LogStream::operator<<(float num){
 LogStream& LogStream::operator<<(double num) {
     if(buffer_.avail() >= LogStream::kMaxNumericSize) {
         char* buffer = buffer_.current();
-        snprintf(buffer, buffer_.avail(), "%lf", num);
+        int len = snprintf(buffer, buffer_.avail(), "%lf", num);
+        buffer_.add(len);
     }
     return *this;
 }

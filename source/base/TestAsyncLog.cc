@@ -12,6 +12,7 @@ int main() {
     log = new AsyncLogging();
     Logger::setOutput(OutputFunc);
 
+    LOG_INFO << "Test log....";
     LOG_INFO << 123456;
     struct timespec ts = { 5, 0 };
     nanosleep(&ts, NULL);

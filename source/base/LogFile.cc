@@ -16,7 +16,7 @@ LogFile::~LogFile() {
 void LogFile::append(const char* str, int len) {
     int remain = len;
     while(remain > 0) {
-        int bytes = ::fwrite_unlocked(str, remain, 1, fp_);
+        int bytes = ::fwrite_unlocked(str, 1, remain, fp_);
         if(bytes != remain) {
             int err = ::ferror(fp_);
             if(err) {
