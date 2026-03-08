@@ -4,7 +4,8 @@ set(base_SRCS
     Logging.cc
     LogStream.cc
     TimeStamp.cc
-    TestAsyncLog.cc
+    #TestAsyncLog.cc
 )
 
-add_executable(aynclog_test ${base_SRCS})
+#add_executable(aynclog_test ${base_SRCS})
+add_library(moduo_base SHARED ${base_SRCS})
