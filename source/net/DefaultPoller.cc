@@ -1,6 +1,6 @@
 #include "Poller.h"
+#include "EpollPoller.h"
 
 Poller* Poller::newDefaultPoller(EventLoop *loop) {
-    //add code
-    return nullptr;
+    return new EpollPoller(loop);
 }

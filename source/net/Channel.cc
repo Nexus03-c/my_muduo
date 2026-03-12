@@ -1,4 +1,5 @@
 #include "Channel.h"
+#include "EventLoop.h"
 #include "source/base/Logging.h"
 
 #include <sys/epoll.h>
@@ -32,13 +33,11 @@ void Channel::tie(const std::shared_ptr<void>&) {
 }
 
 void Channel::update() {
-    //add code
-    //loop_->updateChannel(this);
+    loop_->UpdateChannel(this);
 }
 
 void Channel::remove() {
-    //add code
-    //loop_->removeChannel(this);
+    loop_->RemoveChannel(this);
 }
 
 void Channel::handleEventWithGuard(TimeStamp receive_timestamp) {
