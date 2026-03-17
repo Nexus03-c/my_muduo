@@ -8,6 +8,7 @@ set(net_SRCS
     DefaultPoller.cc
     EventLoopThread.cc
     Socket.cc
+    Acceptor.cc
 )
 
 add_library(muduo_net SHARED ${net_SRCS})

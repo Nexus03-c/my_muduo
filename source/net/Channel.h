@@ -42,7 +42,7 @@ public:
     bool isNoneEvent() { return events_ == kNoneEvent; }
     //index
     int index() { return index_; }
-    int set_index(int index) { index_ = index; }
+    void set_index(int index) { index_ = index; }
 
     EventLoop* ownerLoop() { return loop_;}
     void remove();

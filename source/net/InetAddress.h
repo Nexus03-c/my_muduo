@@ -6,7 +6,7 @@
 class InetAddress {
 public:
     explicit InetAddress(const sockaddr_in& addr): addr_(addr) {}
-    InetAddress(std::string ip_str, uint16_t port);
+    InetAddress(std::string ip_str = "127.0.0.1", uint16_t port = 0);
 
     sa_family_t sa_family() const {return addr_.sin_family;}
     std::string toIp() const;
