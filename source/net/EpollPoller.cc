@@ -54,7 +54,7 @@ TimeStamp EpollPoller::poll(int timeout_ms, ChannelList *active_channels) {
     TimeStamp now(TimeStamp::now());
     int save_erro = errno;
     if(num_events > 0) {
-        LOG_DEBUG<<"events happen";
+        //LOG_DEBUG<<"events happen";
         fillActiveChannels(num_events, active_channels);
         if(static_cast<size_t>(num_events) == events_.size()) {
             events_.resize(2 * num_events);

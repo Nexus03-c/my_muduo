@@ -24,12 +24,19 @@ Channel::~Channel() {
 }
 
 void Channel::handleEvent(TimeStamp receive_timestamp) {
-    //add code
-    handleEventWithGuard(receive_timestamp);
+    if(tied_) {
+        std::shared_ptr<void> obj = tie_.lock();
+        if(obj) {
+            handleEventWithGuard(receive_timestamp);
+        }
+    } else {
+        handleEventWithGuard(receive_timestamp);
+    }
 }
 
-void Channel::tie(const std::shared_ptr<void>&) {
-    //add code
+void Channel::tie(const std::shared_ptr<void>& obj) {
+    tie_ = obj;
+    tied_ = true;
 }
 
 void Channel::update() {

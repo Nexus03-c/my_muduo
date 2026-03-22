@@ -1,7 +1,7 @@
 #include "EventLoopThreadPool.h"
 #include "EventLoopThread.h"
 
-EventLoopThreadPool::EventLoopThreadPool(EventLoop* base_loop, const std::string &name = std::string()) 
+EventLoopThreadPool::EventLoopThreadPool(EventLoop* base_loop, const std::string &name) 
   : started_(false),
     base_loop_(base_loop),
     name_(name),

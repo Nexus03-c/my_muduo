@@ -31,11 +31,11 @@ public:
     void tie(const std::shared_ptr<void>&);
 
     //set fd_ event
-    void enableReading() { events_ |= kReadEvent; }
-    void disableReading() { events_ &= ~kReadEvent; }
-    void enableWriting() { events_ |= kWriteEvent; }
-    void disableWriting() { events_ &= ~kWriteEvent; }
-    void disableAll() { events_ = kNoneEvent; }
+    void enableReading() { events_ |= kReadEvent; update();}
+    void disableReading() { events_ &= ~kReadEvent; update();}
+    void enableWriting() { events_ |= kWriteEvent; update();}
+    void disableWriting() { events_ &= ~kWriteEvent; update();}
+    void disableAll() { events_ = kNoneEvent; update();}
     //get fd_ event
     bool isReading() { return events_ & kReadEvent; }
     bool isWriting() { return events_ & kWriteEvent; }
