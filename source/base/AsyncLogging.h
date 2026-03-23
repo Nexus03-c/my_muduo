@@ -11,7 +11,7 @@
 
 class AsyncLogging : public nonecopyable {
 public:
-    AsyncLogging(int flush_interval = 2, std::string log_file = "/home/leo/test.log");
+    AsyncLogging(int flush_interval = 2, std::string log_file = "test.log");
     ~AsyncLogging();
 
     void append(const char *log_line, int len);

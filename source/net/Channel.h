@@ -19,7 +19,7 @@ public:
     //event callback
     void handleEvent(TimeStamp receive_timestamp);
     //set event callback
-    void setReadCallback(ReadEventCallback cb) { read_callback_ = std::move(read_callback_); }
+    void setReadCallback(ReadEventCallback cb) { read_callback_ = std::move(cb); }
     void setWriteCallback(EventCallback cb) { write_callback_ = std::move(cb); }
     void setCloseCallback(EventCallback cb) { close_callback_ = std::move(cb); }
     void setErrorCallback(EventCallback cb) { error_callback_ = std::move(cb); }

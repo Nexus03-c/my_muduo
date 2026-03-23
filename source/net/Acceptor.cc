@@ -48,6 +48,7 @@ void Acceptor::handleRead() {
             ::close(conn_fd);
         }
     } else {
+        LOG_ERROR<<"Accept error: "<<errno;
         if(errno == EMFILE) {
             LOG_ERROR<<"Reach fd max limit";
         }

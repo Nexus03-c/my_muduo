@@ -44,7 +44,7 @@ void TcpServer::setThreadNums(int thread_nums) {
 void TcpServer::NewConnection(int conn_fd, const InetAddress &addr) {
     EventLoop* io_loop = thread_pool_->GetNextLoop();
     char buf[64];
-    snprintf(buf, sizeof buf, "-%s%d", ip_port_.c_str(), nextconn_id_);
+    snprintf(buf, sizeof buf, "-%s#%d", ip_port_.c_str(), nextconn_id_);
     nextconn_id_++;
     std::string conn_name = name_ + buf;
 
