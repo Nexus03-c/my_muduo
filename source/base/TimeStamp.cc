@@ -1,7 +1,10 @@
 #include "TimeStamp.h"
+#include <sys/time.h>
 
 TimeStamp TimeStamp::now() {
-    return TimeStamp(time(NULL));
+    timeval tv;
+    gettimeofday(&tv, NULL);
+    return TimeStamp(tv.tv_sec * TimeStamp::kMicroSecondsPerSecond + tv.tv_usec);
 }
 
 std::string TimeStamp::toString() {

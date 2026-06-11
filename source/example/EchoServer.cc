@@ -36,6 +36,7 @@ private:
     }
     void HanldeMessage(const TcpConnectionPtr& conn, Buffer* buf, TimeStamp receive_time) {
         std::string str = buf->retrieveAllAsString();
+        LOG_INFO<<"Receive message from connection "<<conn->name()<<" "<<"msg: "<<str;
         conn->send(str);
         conn->shutdown();
     }
