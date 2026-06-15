@@ -7,6 +7,7 @@
 #include "source/base/TimeStamp.h"
 #include <memory>
 #include <string>
+#include <any>
 
 class EventLoop;
 class Channel;
@@ -36,6 +37,10 @@ public:
     void setHighWaterMarkCallback(const HighWaterCallback& cb, size_t highWaterMark) { high_water_cb_ = cb; high_water_mask_ = highWaterMark; }
 
     void setCloseCallback(const CloseCallback& cb) { close_cb_ = cb; }
+
+    void setContext(const std::any& context) { context_ = std::move(context); }
+    const std::any& getContext() const{ return context_; }
+    std::any* getMutableContext() { return &context_; }
 private:
     enum StateE { kDisconnected, kConnecting, kConnected, kDisconnecting };
     void sendInLoop(const std::string &message);
@@ -72,6 +77,8 @@ private:
     //input && output buffer
     Buffer input_buffer_;
     Buffer output_buffer_;
+
+    std::any context_;
 };
 
 #endif

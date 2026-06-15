@@ -23,6 +23,11 @@ public:
 
     const char* peek() const { return begin() + reader_index_; }
 
+    const char* findCRLF() const{
+        const char* crlf = std::search(peek(), beginWrite(), kCRLF, kCRLF+2);
+        return crlf == beginWrite()? nullptr : crlf;
+    }
+
     void retrieveAll() {
         reader_index_ = kCheapPrepend;
         writer_index_ = kCheapPrepend;
@@ -33,6 +38,12 @@ public:
             reader_index_ += len;
         } else {
             retrieveAll();
+        }
+    }
+
+    void retriveUntil(const char* end) {
+        if(end<=beginWrite()) {
+            retrieve(end-peek());
         }
     }
     
@@ -62,6 +73,10 @@ public:
         append(static_cast<const char*>(data), len);
     }
 
+    void append(const std::string& str) {
+        append(str.c_str(), str.size());
+    }
+
     char* beginWrite() { return begin()+writer_index_; }
     const char* beginWrite() const { return begin()+writer_index_; }
 
@@ -89,6 +104,8 @@ private:
     std::vector<char> buffer_;
     size_t reader_index_;
     size_t writer_index_;
+
+    static const char kCRLF[];
 };
 
 #endif

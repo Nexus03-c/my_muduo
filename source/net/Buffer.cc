@@ -23,3 +23,5 @@ ssize_t Buffer::readFd(int fd, int* savedErrno) {
     }
     return n;
 }
+
+const char Buffer::kCRLF[] = "\r\n";

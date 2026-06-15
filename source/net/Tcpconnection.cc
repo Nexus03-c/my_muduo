@@ -120,6 +120,7 @@ void TcpConnection::HandleRead(TimeStamp receive_time) {
     int save_errno = 0;
     ssize_t n = input_buffer_.readFd(channel_->fd(), &save_errno);
     if(n > 0) {
+        LOG_INFO<<"handle message";
         message_cb_(shared_from_this(), &input_buffer_, receive_time);
     } else if( n == 0) {
         HandleClose();

@@ -14,3 +14,5 @@ aux_source_directory(. net_SRCS)
 
 add_library(muduo_net SHARED ${net_SRCS})
 target_link_libraries(muduo_net muduo_base)
+
+add_subdirectory(http)

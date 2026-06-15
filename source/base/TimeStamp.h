@@ -16,6 +16,7 @@ public:
 
     static TimeStamp invalid() { return TimeStamp(); }
     bool valid() const { return microsecondsSinceEpoch_ > 0; }
+    void swap(TimeStamp& time) { std::swap(microsecondsSinceEpoch_, time.microsecondsSinceEpoch_); }
 private:
     int64_t microsecondsSinceEpoch_;
 };
